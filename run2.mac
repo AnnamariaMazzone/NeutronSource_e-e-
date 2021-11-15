@@ -1,0 +1,63 @@
+#
+# Macro file for "AmBe.cc"
+#
+#/control/execute vis.mac
+/control/verbose 2
+#/tracking/verbose 2
+/run/verbose 1
+#
+/testhadr/det/setAbsorMat Helium3
+/testhadr/det/setContMat Ergal
+/testhadr/det/setContTappoThick  0.5 mm  #1.4 mm
+/testhadr/det/setContThick  0.5 mm  #1.4 mm
+/testhadr/det/setContRadius 1.27 cm #3.81 cm
+/testhadr/det/setContLength 20 cm
+#
+/run/initialize
+#
+/process/list
+#
+#
+/gps/particle e-
+# source
+# a point source placed into the center of the container 
+#/gps/pos/type Point
+#/gps/pos/centre 0. 0. 0.
+/gps/pos/type Volume
+/gps/pos/shape Cylinder
+/gps/pos/centre 0. 0. 0. cm
+/gps/pos/radius 1.27 cm
+/gps/pos/halfz 10. cm
+/gps/pos/confine sAbsor
+
+
+# angular distribution
+# angular distribution isotropic
+/gps/ang/type iso  
+
+# 
+# energy distribution
+# energy distribution
+/gps/ene/type Mono
+/gps/ene/mono 1 MeV
+
+#
+/control/alias pi 3.141592653589793
+/analysis/setFileName canc7
+#angle_invMass_Steeln20MeV_100mil
+#/analysis/h1/set 4 100  0. 30.  MeV #gammas
+#/analysis/h1/set 7  100  0. 100.  MeV #protons
+#/analysis/h1/set 14  100  0 {pi} none    # Open Angle (rad)//* E gamma (MeV)
+#/analysis/h1/set 15  100  0. 20.  MeV #InvMass   
+/analysis/h1/set 1 110 0 110 MeV
+/analysis/h2/set 1 100 -5 5 cm none linear 100 -5 5 cm none linear #x-y
+
+#
+/run/printProgress 100
+#
+/run/beamOn 10000
+
+10 cm 30 bar 0.5 6cm raggio
+
+0.5 mm acciaio
+

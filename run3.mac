@@ -1,0 +1,67 @@
+#
+# Macro file for "AmBe.cc"
+#
+/control/execute vis.mac
+/control/verbose 2
+/run/verbose 1
+#
+/testhadr/det/setAbsorMat Galactic
+/testhadr/det/setContMat Stainless-Steel
+/testhadr/det/setAbsorRadius 11.7 mm
+/testhadr/det/setAbsorLength 200 mm
+/testhadr/det/setContThick  0.5 mm
+#1 pollice diametro 3 cm fascio
+#coincidenze ee-
+#rate di sigle alto aumenta prob coincidenze random
+#intorno al tubo un il 5cm raggio
+#numero particelle prodotte spettro
+#20 MeV
+#gamma 550 kev 1mev 5 10 15 20 Mev
+#1e6
+
+#i gammapossono convertire nei rivelatori fino a 500 key no problema son MeV fanno pair #production
+
+#
+/run/initialize
+#
+/process/list
+#
+#
+/gps/source/intensity 0.0529
+/gps/particle neutron
+# source
+/gps/pos/type Beam
+
+# the beam spot is centered at the origin and is 
+# of 1d gaussian shape with a 3mm central plateau
+/gps/pos/shape Circle 
+/gps/pos/centre 0. 0. -6. cm
+/gps/pos/radius 3. cm
+/gps/pos/sigma_r 0.5 cm
+
+# angular distribution
+# the beam is travelling along the x-axis with 5 degrees dispersion
+/gps/ang/rot1 1 0 0
+/gps/ang/rot2 0 1 0
+/gps/ang/type beam1d  
+
+# 
+# energy distribution
+/gps/ene/mono 0.00001 MeV
+
+#
+/control/alias pi 3.141592653589793
+/analysis/setFileName canc6
+#angle_invMass_Steeln20MeV_100mil
+#/analysis/h1/set 4 100  0. 30.  MeV #gammas
+#/analysis/h1/set 7  100  0. 100.  MeV #protons
+#/analysis/h1/set 14  100  0 {pi} none    # Open Angle (rad)//* E gamma (MeV)
+#/analysis/h1/set 15  100  0. 20.  MeV #InvMass   
+/analysis/h1/set 1 8 -6 2 MeV
+/analysis/h2/set 1 100 -5 5 cm none linear 100 -5 5 cm none linear #x-y
+
+#
+/run/printProgress 100
+#
+/run/beamOn 10000
+
