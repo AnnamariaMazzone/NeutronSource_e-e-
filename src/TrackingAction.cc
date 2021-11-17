@@ -58,12 +58,12 @@ TrackingAction::TrackingAction(EventAction* event)
 void TrackingAction::PreUserTrackingAction(const G4Track* track)
 {  
   //count secondary particles
-  if (track->GetTrackID() == 1) fEkin1 = track->GetKineticEnergy();
-//  if (track->GetTrackID() == 1) return;  
-//  G4String name   = track->GetDefinition()->GetParticleName();
-//  Run* run = static_cast<Run*>(
-//        G4RunManager::GetRunManager()->GetNonConstCurrentRun());    
-//  run->ParticleCount(name,fEkin1);
+  if (track->GetTrackID() == 1) return;
+  G4String name   = track->GetDefinition()->GetParticleName();
+    G4double energy = track->GetKineticEnergy();
+  Run* run = static_cast<Run*>(
+        G4RunManager::GetRunManager()->GetNonConstCurrentRun());
+  run->ParticleCount(name,energy);
 }
 
 //....oooOO0OOooo........oooOO0OOooo........oooOO0OOooo........oooOO0OOooo......
@@ -80,23 +80,23 @@ void TrackingAction::PostUserTrackingAction(const G4Track* track)
 //        run->AddNumEventi();
 //    }
     
-// // keep only outgoing particle
-// G4StepStatus status = track->GetStep()->GetPostStepPoint()->GetStepStatus();
-// if (status != fWorldBoundary) return;
-//
-// const G4ParticleDefinition* particle = track->GetParticleDefinition();
-// G4String name   = particle->GetParticleName();
-// G4double energy = track->GetKineticEnergy();
+ // keep only outgoing particle
+ G4StepStatus status = track->GetStep()->GetPostStepPoint()->GetStepStatus();
+ if (status != fWorldBoundary) return;
+
+ const G4ParticleDefinition* particle = track->GetParticleDefinition();
+ G4String name   = particle->GetParticleName();
+ G4double energy = track->GetKineticEnergy();
  
-// fEventAction->AddEflow(energy);  
+ fEventAction->AddEflow(energy);
  
-// Run* run = static_cast<Run*>(
-//              G4RunManager::GetRunManager()->GetNonConstCurrentRun());
-// run->ParticleFlux(name,energy);               
+ Run* run = static_cast<Run*>(
+              G4RunManager::GetRunManager()->GetNonConstCurrentRun());
+ run->ParticleFlux(name,energy);
  
- // histograms: enery flow
- //
-/* G4AnalysisManager* analysis = G4AnalysisManager::Instance();
+//  histograms: enery flow
+ 
+ G4AnalysisManager* analysis = G4AnalysisManager::Instance();
  
  G4int ih = 0; 
  G4String type   = particle->GetParticleType();      
@@ -114,7 +114,7 @@ void TrackingAction::PostUserTrackingAction(const G4Track* track)
  else if (type == "meson")                    ih = 12;
  else if (type == "lepton")                   ih = 13;
  if (ih > 0) analysis->FillH1(ih,energy);
-*/
+
  }
 
 //....oooOO0OOooo........oooOO0OOooo........oooOO0OOooo........oooOO0OOooo......

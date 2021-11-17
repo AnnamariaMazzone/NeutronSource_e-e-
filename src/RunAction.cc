@@ -88,8 +88,6 @@ void RunAction::BeginOfRunAction(const G4Run*)
   if ( analysisManager->IsActive() ) {
     analysisManager->OpenFile();
   }
-   ofs.open("risoluzione.txt", std::ios::out);
-   
    
 }
 
@@ -105,7 +103,6 @@ void RunAction::EndOfRunAction(const G4Run*)
     analysisManager->Write();
     analysisManager->CloseFile();
   }
-  ofs.close();
   // show Rndm status
   if (isMaster) G4Random::showEngineStatus();
 }

@@ -438,6 +438,10 @@ void SteppingAction::UserSteppingAction(const G4Step* aStep)
     G4String name   = particle->GetParticleName();
     // check if we are in scoring volume
     if (volume != fScoringVolume) return;
+    G4double edepStep = aStep->GetTotalEnergyDeposit();
+    if (edepStep <= 0.) return;
+    fEventAction->AddEdep(edepStep);//energia depositata nello scoringVolume
+    
     G4String nomefile="X17_vero_10_MAl_40_1mm.txt";
     if(aStep->GetTrack()->GetParentID()!=0)return;
     if(buona){
@@ -548,35 +552,7 @@ void SteppingAction::UserSteppingAction(const G4Step* aStep)
         
         //        myfile << energy << '\t' << E_saved << '\t' << mass << '\t'<< mass_saved <<'\t'<<P.dot(P_saved);
         saved_eventID=999999999999;
-        // histograms: energy flow
-        //
-        //G4String procName = endPoint->GetProcessDefinedStep()->GetProcessName();
-        G4double edepStep = aStep->GetTotalEnergyDeposit();
-        if (edepStep <= 0.) return;
-        fEventAction->AddEdep(edepStep);
-        
-        G4int ih = 0;
-        G4String type   = particle->GetParticleType();
-        G4double charge = particle->GetPDGCharge();
-        if (charge > 3.)  ih = 10;
-        else if (particle == G4Gamma::Gamma())       ih = 4;
-        else if (particle == G4Electron::Electron()) ih = 5;
-        else if (particle == G4Positron::Positron()) ih = 5;
-        else if (particle == G4Neutron::Neutron())   ih = 6;
-        else if (particle == G4Proton::Proton())     ih = 7;
-        else if (particle == G4Deuteron::Deuteron()) ih = 8;
-        else if (particle == G4Alpha::Alpha())       ih = 9;
-        else if (type == "nucleus")                  ih = 10;
-        else if (type == "baryon")                   ih = 11;
-        else if (type == "meson")                    ih = 12;
-        else if (type == "lepton")                   ih = 13;
-        if (ih > 0) analysisManager->FillH1(ih,energy);
-        
-        
     }
-    //    }
-    //    else
-    //        G4cout<<"processo nullo"<<G4endl;
 }
 
 //....oooOO0OOooo........oooOO0OOooo........oooOO0OOooo........oooOO0OOooo......

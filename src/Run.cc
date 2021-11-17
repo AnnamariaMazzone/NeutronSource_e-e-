@@ -275,8 +275,7 @@ void Run::EndOfRun()
    
   // compute mean Energy deposited and rms
   //
-    G4cout<<"numero di eventi utili "<<fNumEventi<<G4endl;
-    G4int TotNbofEvents = fNumEventi;//numberOfEvent;
+    G4int TotNbofEvents = numberOfEvent;
   fEnergyDeposit /= TotNbofEvents; fEnergyDeposit2 /= TotNbofEvents;
   G4double rmsEdep = fEnergyDeposit2 - fEnergyDeposit*fEnergyDeposit;
   if (rmsEdep>0.) rmsEdep = std::sqrt(rmsEdep);
