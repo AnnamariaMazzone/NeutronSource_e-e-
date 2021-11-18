@@ -70,50 +70,41 @@ void TrackingAction::PreUserTrackingAction(const G4Track* track)
 
 void TrackingAction::PostUserTrackingAction(const G4Track* track)
 {
-    //questa parte calcola l'energia rilasciata dalle particelle del fascio nell'evento
-//    if (track->GetTrackID() == 1 && fEventAction->GetIn()) {
-//      G4double Ekin2 = track->GetKineticEnergy();
-//      G4double dElost = (fEkin1 - Ekin2)/fEkin1;
-//        Run* run = static_cast<Run*>(
-//                      G4RunManager::GetRunManager()->GetNonConstCurrentRun());
-//        run->AddEdep(dElost);
-//        run->AddNumEventi();
-//    }
-    
- // keep only outgoing particle
- G4StepStatus status = track->GetStep()->GetPostStepPoint()->GetStepStatus();
- if (status != fWorldBoundary) return;
-
- const G4ParticleDefinition* particle = track->GetParticleDefinition();
- G4String name   = particle->GetParticleName();
- G4double energy = track->GetKineticEnergy();
- 
- fEventAction->AddEflow(energy);
- 
- Run* run = static_cast<Run*>(
-              G4RunManager::GetRunManager()->GetNonConstCurrentRun());
- run->ParticleFlux(name,energy);
- 
-//  histograms: enery flow
- 
- G4AnalysisManager* analysis = G4AnalysisManager::Instance();
- 
- G4int ih = 0; 
- G4String type   = particle->GetParticleType();      
- G4double charge = particle->GetPDGCharge();
- if (charge > 3.)  ih = 10; 
- else if (particle == G4Gamma::Gamma())       ih = 4;
- else if (particle == G4Electron::Electron()) ih = 5;
- else if (particle == G4Positron::Positron()) ih = 5;
- else if (particle == G4Neutron::Neutron())   ih = 6;
- else if (particle == G4Proton::Proton())     ih = 7;
- else if (particle == G4Deuteron::Deuteron()) ih = 8;
- else if (particle == G4Alpha::Alpha())       ih = 9;
- else if (type == "nucleus")                  ih = 10;
- else if (type == "baryon")                   ih = 11;
- else if (type == "meson")                    ih = 12;
- else if (type == "lepton")                   ih = 13;
- if (ih > 0) analysis->FillH1(ih,energy);
+   
+// // keep only outgoing particle
+// G4StepStatus status = track->GetStep()->GetPostStepPoint()->GetStepStatus();
+// if (status != fWorldBoundary) return;
+//
+// const G4ParticleDefinition* particle = track->GetParticleDefinition();
+// G4String name   = particle->GetParticleName();
+// G4double energy = track->GetKineticEnergy();
+// 
+// fEventAction->AddEflow(energy);
+// 
+// Run* run = static_cast<Run*>(
+//              G4RunManager::GetRunManager()->GetNonConstCurrentRun());
+// run->ParticleFlux(name,energy);
+// 
+////  histograms: enery flow
+// 
+// G4AnalysisManager* analysis = G4AnalysisManager::Instance();
+// 
+// G4int ih = 0; 
+// G4String type   = particle->GetParticleType();      
+// G4double charge = particle->GetPDGCharge();
+// if (charge > 3.)  ih = 10; 
+// else if (particle == G4Gamma::Gamma())       ih = 4;
+// else if (particle == G4Electron::Electron()) ih = 5;
+// else if (particle == G4Positron::Positron()) ih = 5;
+// else if (particle == G4Neutron::Neutron())   ih = 6;
+// else if (particle == G4Proton::Proton())     ih = 7;
+// else if (particle == G4Deuteron::Deuteron()) ih = 8;
+// else if (particle == G4Alpha::Alpha())       ih = 9;
+// else if (type == "nucleus")                  ih = 10;
+// else if (type == "baryon")                   ih = 11;
+// else if (type == "meson")                    ih = 12;
+// else if (type == "lepton")                   ih = 13;
+// if (ih > 0) analysis->FillH1(ih,energy);
 
  }
 

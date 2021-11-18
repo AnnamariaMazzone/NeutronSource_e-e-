@@ -188,9 +188,9 @@ void DetectorConstruction::DefineMaterials()
     Sci->AddElement(C, natoms=21);
     Sci->AddElement(H, natoms=19);
     
-    G4Material* PET = G4NistManager::Instance()->FindOrBuildMaterial("G4_MYLAR");
-    
-    G4Material* Kapton = G4NistManager::Instance()->FindOrBuildMaterial("G4_KAPTON");
+//    G4Material* PET = G4NistManager::Instance()->FindOrBuildMaterial("G4_MYLAR");
+//    
+//    G4Material* Kapton = G4NistManager::Instance()->FindOrBuildMaterial("G4_KAPTON");
     
     //Epoxy resin (C11H12O3)
     G4double d_Epoxy = 1.1*g/cm3;        //weight ratio 70%:30%
@@ -296,9 +296,9 @@ G4VPhysicalVolume* DetectorConstruction::ConstructVolumes()
    
     //il cilindro rivelatore è sostituito con due piani
     G4double screenDimy=fDetThickness;
-    G4double screenDimx=12*cm;
-    G4double screenDimz=12*cm;
-    G4double distanza_det=10*cm;
+    G4double screenDimx=40*cm;
+    G4double screenDimz=40*cm;
+    G4double distanza_det=20*cm;
    G4Box* screenC1 = new G4Box("Screen1",                                    //name
                                     0.5*screenDimx,0.5*screenDimy,0.5*screenDimz);
     G4Box* screenC2 = new G4Box("Screen2",                                    //name

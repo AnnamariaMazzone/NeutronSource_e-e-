@@ -442,7 +442,7 @@ void SteppingAction::UserSteppingAction(const G4Step* aStep)
     if (edepStep <= 0.) return;
     fEventAction->AddEdep(edepStep);//energia depositata nello scoringVolume
     
-    G4String nomefile="X17_vero_10_MAl_40_1mm.txt";
+    G4String nomefile="X17_vero_10_MAl_40_1mm_2.txt";
     if(aStep->GetTrack()->GetParentID()!=0)return;
     if(buona){
         if(aStep->GetPostStepPoint()->GetStepStatus() == fGeomBoundary|| aStep->GetTrack()->GetKineticEnergy()<0.01)

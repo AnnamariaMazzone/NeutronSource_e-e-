@@ -9,7 +9,7 @@
 /testhadr/det/setDetMat EJ-200 
 /testhadr/det/setAbsorMat Helium3
 /testhadr/det/setContMat CarbonFiber
-/testhadr/det/setLayerMat G4_Mylar
+/testhadr/det/setLayerMat G4_MYLAR
 
 /testhadr/det/setContTappoThick  1. mm  #1.4 mm
 /testhadr/det/setContThick  1. mm  #1.4 mm
@@ -21,34 +21,47 @@
 
 #
 /run/initialize
-/run/setCut 1 mm
 #
-/process/list
+#/process/list
 #
-#/gun/particle gamma
+#
+#/gps/particle neutron
+## source
+#/gps/pos/type Beam
 
-#/gun/ion 95 241
-#/gun/energy 20. MeV
+# the beam spot is centered at the origin and is
+# of 1d gaussian shape with a 3mm central plateau
+#/gps/pos/shape Circle
+#/gps/pos/centre 0. 0. 11 cm
+##/gps/pos/radius 2.5 cm
+#/gps/pos/sigma_r 1.06 cm #FWHM 2.5 cm
+
+## angular distribution
+## the beam is travelling along the z-axis
+#/gps/ang/rot1 1 0 0
+#/gps/ang/rot2 0 1 0
+#/gps/ang/type beam1d
+#/gps/ang/sigma_r 0. deg
+##
+## energy distribution
+#/gps/ene/type Mono
+#/gps/ene/mono 40 MeV
 
 #
 /control/alias pi 3.141592653589793
-/analysis/setFileName X17_vero_10_MAl_40_1mm
-#im_X17_CFPET_30bar30K
-#/analysis/h1/set 5  100  0. 20.  MeV #electrons
-#/analysis/h1/set 4 100  0. 30.  MeV #gammas
-#/analysis/h1/set 7  100  0. 100.  MeV #protons
-#/analysis/h1/setAscii 14 true
+/analysis/setFileName im_prova_1mm_1cm
+#/analysis/h1/set 1  100  0. 40.  MeV #protons
+#/analysis/h1/set 7  100  0. 40.  MeV #protons
 /analysis/h1/set 14  100  0 {pi} none    # Open Angle (rad)//* E gamma (MeV)
 /analysis/h1/set 15  100  0. 20.  MeV #InvMass   
 /analysis/h1/set 16  100  0 {pi} none    # Open Angle (rad)//* E gamma (MeV)
-/analysis/h1/set 17  100  0. 20.  MeV #InvMass   
-#/analysis/h1/set 1 8 -6 2 MeV
-#/analysis/h2/set 1 100 -5 5 cm none linear 100 -5 5 cm none linear #x-y
-
-#
+/analysis/h1/set 17  100  0. 20.  MeV #InvMass  
 /run/printProgress 100000
 #
 /run/beamOn 1000000
- 
+
+
+
+
 
 
