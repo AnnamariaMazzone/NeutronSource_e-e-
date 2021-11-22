@@ -75,7 +75,7 @@
 #/analysis/h1/set 17  100  0. 20.  MeV #InvMass
 /run/printProgress 100000
 #
-/run/beamOn 10
+/run/beamOn 100000
 
 
 

@@ -84,7 +84,7 @@ void EventAction::EndOfEventAction(const G4Event*)
   run->AddEdep (fTotalEnergyDeposit);
   run->AddEflow(fTotalEnergyFlow);
                
-  G4AnalysisManager::Instance()->FillH1(1,fTotalEnergyDeposit);
+  G4AnalysisManager::Instance()->FillH1(1,log10(fTotalEnergyDeposit));
   G4AnalysisManager::Instance()->FillH1(3,fTotalEnergyFlow);
 }
 

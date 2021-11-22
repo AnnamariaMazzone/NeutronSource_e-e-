@@ -440,7 +440,7 @@ void SteppingAction::UserSteppingAction(const G4Step* aStep)
     if (volume != fScoringVolume) return;
     G4double edepStep = aStep->GetTotalEnergyDeposit();
     if (edepStep <= 0.) return;
-    if(particle == G4Positron::Positron())fEventAction->AddEdep(edepStep);//energia depositata nello scoringVolume dai protoni
+    if(particle == G4Proton::Proton())fEventAction->AddEdep(edepStep);//energia depositata nello scoringVolume dai protoni
     
 }
 

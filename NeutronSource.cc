@@ -45,7 +45,7 @@
 #include "PhysicsList.hh"
 #include "ActionInitialization.hh"
 #include "SteppingVerbose.hh"
-#include "QGSP_BIC.hh"
+#include "QGSP_BIC_HP.hh"
 #include "G4UIExecutive.hh"
 #include "G4VisExecutive.hh"
 
@@ -78,7 +78,7 @@ int main(int argc,char** argv) {
 
 //  PhysicsList* physicsList = new PhysicsList;
 //  runManager->SetUserInitialization(phys);
-    G4VModularPhysicsList* physicsList = new QGSP_BIC;
+    G4VModularPhysicsList* physicsList = new QGSP_BIC_HP;
     physicsList->SetVerboseLevel(1);
     runManager->SetUserInitialization(physicsList);
   runManager->SetUserInitialization(new ActionInitialization(det));
