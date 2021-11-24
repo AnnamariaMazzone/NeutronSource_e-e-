@@ -61,7 +61,7 @@ PrimaryGeneratorAction::PrimaryGeneratorAction(DetectorConstruction* det)
     fParticleGun->SetParticlePosition(G4ThreeVector(0.,0.,0.));
     fParticleGun->SetParticleMomentumDirection(G4ThreeVector(0.,0.,1.));
     std::ifstream myfile
-    ("/Users/annamaria/lavoro/X17/NeutronSource_e+e-/e_0.347_V_17.0_0.00256_5m_2.txt");
+    ("/Users/annamaria/lavoro/X17/NeutronSource_e+e-/e_0.347_EM_5m.txt");
     //e_0.347_EM.txt");//e_0.347_V_17.0_0.00256.txt");//_5m.txt
     
     
@@ -180,9 +180,16 @@ PrimaryGeneratorAction::PrimaryGeneratorAction(DetectorConstruction* det)
               G4double invMass=sqrt(pow(emass,2)+pow(pmass,2)+
               2*(Eplus*Eminus-mom_plus*mom_minus*Pplus.dot(Pminus)));
               G4AnalysisManager* analysisManager = G4AnalysisManager::Instance();
-              analysisManager->FillH1(15,invMass);
+        G4double Y=(Eplus-Eminus)/(Eplus+Eminus);
+              analysisManager->FillH1(15,Y);
               G4double angleE = Pplus.angle(Pminus);
               analysisManager->FillH1(14,angleE);
+//        G4String nomefile="YvsTheta_IPC";
+//        std::ofstream WriteDataIn(nomefile, std::ios::app);
+//                    WriteDataIn
+//                    <<   Y       <<" " //  1
+//                    <<   angleE     <<" " //  2
+//                    <<   G4endl;
     }
 
 //....oooOO0OOooo........oooOO0OOooo........oooOO0OOooo........oooOO0OOooo......
