@@ -61,7 +61,7 @@ PrimaryGeneratorAction::PrimaryGeneratorAction(DetectorConstruction* det)
     fParticleGun->SetParticlePosition(G4ThreeVector(0.,0.,0.));
     fParticleGun->SetParticleMomentumDirection(G4ThreeVector(0.,0.,1.));
     std::ifstream myfile
-    ("/Users/annamaria/lavoro/X17/NeutronSource_e+e-/e_0.347_V_17.0_0.00256_5m_2.txt");
+    ("/Users/annamaria/lavoro/X17/NeutronSource_e+e-/e_0.347_V_17.0_0.00256_5m.txt");
     //e_0.347_EM.txt");//e_0.347_V_17.0_0.00256.txt");//_5m.txt
     
     
@@ -74,7 +74,7 @@ PrimaryGeneratorAction::PrimaryGeneratorAction(DetectorConstruction* det)
         while (myfile >> em_v >> ep_v >> thetam_v >> thetap_v >> phim_v >> phip_v)
         {
             ind2++;
-           if(ind <1000000){
+           if(ind2 %5==0){
                 em[ind]=em_v;
                 ep[ind]=ep_v;
                 thetam[ind]=thetam_v;

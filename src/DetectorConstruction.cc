@@ -261,7 +261,7 @@ G4VPhysicalVolume* DetectorConstruction::ConstructVolumes()
     G4double AbsorLength = fContainerLength;//-2*fContainThickness;//fAbsorLength + 2*fContainThickness;
     G4double ScreenLength = 40*cm;
     G4double ScreenRadius = 6*cm;
-  G4double WorldSizeXY = 2.*2*(ScreenRadius+fDetThickness);
+  G4double WorldSizeXY = 2.*ScreenLength;//;2.*2*(ScreenRadius+fDetThickness);
   G4double WorldSizeZ  = 2.*ScreenLength;
   
   // World
@@ -298,7 +298,7 @@ G4VPhysicalVolume* DetectorConstruction::ConstructVolumes()
     G4double screenDimy=fDetThickness;
     G4double screenDimx=40*cm;
     G4double screenDimz=40*cm;
-    G4double distanza_det=20*cm;
+    G4double distanza_det=10*cm;
    G4Box* screenC1 = new G4Box("Screen1",                                    //name
                                     0.5*screenDimx,0.5*screenDimy,0.5*screenDimz);
     G4Box* screenC2 = new G4Box("Screen2",                                    //name

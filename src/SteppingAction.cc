@@ -438,46 +438,46 @@ void SteppingAction::UserSteppingAction(const G4Step* aStep)
     G4String name   = particle->GetParticleName();
     // check if we are in scoring volume
     if (volume != fScoringVolume) return;
-    G4double edepStep = aStep->GetTotalEnergyDeposit();
-    if (edepStep <= 0.) return;
-    fEventAction->AddEdep(edepStep);//energia depositata nello scoringVolume
+//    G4double edepStep = aStep->GetTotalEnergyDeposit();
+//    if (edepStep <= 0.) return;
+//    fEventAction->AddEdep(edepStep);//energia depositata nello scoringVolume
     
-    G4String nomefile="X17_vero_10_MAl_40_1mm_2.txt";
+    G4String nomefile="canc";
     if(aStep->GetTrack()->GetParentID()!=0)return;
-    if(buona){
-        if(aStep->GetPostStepPoint()->GetStepStatus() == fGeomBoundary|| aStep->GetTrack()->GetKineticEnergy()<0.01)
-        {
-            buona=false;
-            double dE = dE_saved + aStep->GetTotalEnergyDeposit();
-            std::ofstream WriteDataIn(nomefile, std::ios::app);
-            WriteDataIn
-            
-            <<   0       <<" " //  1
-            <<   0      <<" " //  2
-            <<   0         <<" " //  3
-            <<   0   <<" " //  4
-            <<   0       <<" " //  5
-            <<   0.        <<" "
-            <<   0         <<" "
-            <<   0         <<" "
-            <<   0         <<" "
-            <<   0         <<" "
-            <<   0         <<" "
-            <<   0         <<" "
-            <<   dE              <<" "
-            //            <<   posV.x()         <<" "
-            //            <<   posV.y()         <<" "
-            //            <<   posV.z()         <<" "
-            //            <<   momV.x()         <<" "
-            //            <<   momV.y()         <<" "
-            //            <<   momV.z()         <<" "
-            <<   G4endl;
-        }
-        else
-        {
-            dE_saved = dE_saved + aStep->GetTotalEnergyDeposit();
-        }
-    }
+//    if(buona){
+//        if(aStep->GetPostStepPoint()->GetStepStatus() == fGeomBoundary|| aStep->GetTrack()->GetKineticEnergy()<0.01)
+//        {
+//            buona=false;
+//            double dE = dE_saved + aStep->GetTotalEnergyDeposit();
+//            std::ofstream WriteDataIn(nomefile, std::ios::app);
+//            WriteDataIn
+//
+//            <<   0       <<" " //  1
+//            <<   0      <<" " //  2
+//            <<   0         <<" " //  3
+//            <<   0   <<" " //  4
+//            <<   0       <<" " //  5
+//            <<   0.        <<" "
+//            <<   0         <<" "
+//            <<   0         <<" "
+//            <<   0         <<" "
+//            <<   0         <<" "
+//            <<   0         <<" "
+//            <<   0         <<" "
+//            <<   dE              <<" "
+//            //            <<   posV.x()         <<" "
+//            //            <<   posV.y()         <<" "
+//            //            <<   posV.z()         <<" "
+//            //            <<   momV.x()         <<" "
+//            //            <<   momV.y()         <<" "
+//            //            <<   momV.z()         <<" "
+//            <<   G4endl;
+//        }
+//        else
+//        {
+//            dE_saved = dE_saved + aStep->GetTotalEnergyDeposit();
+//        }
+//    }
     if( aStep->GetPreStepPoint()->GetStepStatus() == fGeomBoundary){
         if(saved_eventID==999999999999){
             saved_eventID= G4RunManager::GetRunManager()->GetCurrentEvent()->GetEventID();
@@ -494,7 +494,7 @@ void SteppingAction::UserSteppingAction(const G4Step* aStep)
             saved_eventID=999999999999;
             return;
         }
-        buona = true;
+//        buona = true;
         //si prende energia e momento della seconda E CALCOLA MI e rimette a 99999 eventid
 //        G4double energy = aStep->GetTrack()->GetKineticEnergy();
         G4double energy = aStep->GetPreStepPoint()->GetKineticEnergy();
@@ -517,15 +517,15 @@ void SteppingAction::UserSteppingAction(const G4Step* aStep)
         G4ThreeVector pos = aStep->GetPreStepPoint()->GetPosition();
         //            G4ThreeVector posV = aStep->GetTrack()->GetVertexPosition();
         //            G4ThreeVector momV = aStep->GetTrack()->GetVertexMomentumDirection();
-        double dE=0.;
-        if(aStep->GetPostStepPoint()->GetStepStatus() == fGeomBoundary)
-            //////        G4double energy = aStep->GetTrack()->GetKineticEnergy();
-        {
-            dE=aStep->GetTotalEnergyDeposit();
-            buona=false;
-        }
-        else
-            dE_saved=aStep->GetTotalEnergyDeposit();
+//        double dE=0.;
+//        if(aStep->GetPostStepPoint()->GetStepStatus() == fGeomBoundary)
+//            //////        G4double energy = aStep->GetTrack()->GetKineticEnergy();
+//        {
+//            dE=aStep->GetTotalEnergyDeposit();
+//            buona=false;
+//        }
+//        else
+//            dE_saved=aStep->GetTotalEnergyDeposit();
         std::ofstream WriteDataIn(nomefile, std::ios::app);
         WriteDataIn
         
@@ -540,8 +540,8 @@ void SteppingAction::UserSteppingAction(const G4Step* aStep)
         <<   x_saved         <<" "
         <<   y_saved         <<" "
         <<   z_saved         <<" "
-        <<   aStep->GetPreStepPoint()->GetKineticEnergy()  <<" "
-        <<   dE              <<" "
+//        <<   aStep->GetPreStepPoint()->GetKineticEnergy()  <<" "
+//        <<   dE              <<" "
         //            <<   posV.x()         <<" "
         //            <<   posV.y()         <<" "
         //            <<   posV.z()         <<" "
