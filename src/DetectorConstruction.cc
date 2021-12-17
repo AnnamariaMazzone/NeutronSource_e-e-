@@ -260,7 +260,7 @@ G4VPhysicalVolume* DetectorConstruction::ConstructVolumes()
 //    G4double AbsorRadiusTappo = fContainerRadius-fContainTappoThickness;//fAbsorRadius + fContainThickness;
     G4double AbsorLength = fContainerLength;//-2*fContainThickness;//fAbsorLength + 2*fContainThickness;
     G4double ScreenLength = 40*cm;
-    G4double ScreenRadius = 6*cm;
+    G4double ScreenRadius = 5*cm;
   G4double WorldSizeXY = 2.*ScreenLength;//;2.*2*(ScreenRadius+fDetThickness);
   G4double WorldSizeZ  = 2.*ScreenLength;
   
@@ -309,13 +309,13 @@ G4VPhysicalVolume* DetectorConstruction::ConstructVolumes()
     G4UnionSolid* screen=new G4UnionSolid("screen_tot", screenC1, screenC2, trScrenn);
     fLDet = new G4LogicalVolume(screen, fDetMaterial , "ScreenLV");
 //    G4RotationMatrix *RotScreentot= new G4RotationMatrix(0,90,0);
-    
+
         new G4PVPlacement(0,-TransScreen/2.,
                           fLDet, "Screen", lWorld, false, 0, 0);
         G4VisAttributes* screenVisAtt = new G4VisAttributes( G4Colour(0,0,1) );
         screenVisAtt -> SetForceSolid();
         fLDet->SetVisAttributes( screenVisAtt );
-//        fLDet->SetVisAttributes( G4VisAttributes::GetInvisible() );
+        fLDet->SetVisAttributes( G4VisAttributes::GetInvisible() );
     
   // Container
   //

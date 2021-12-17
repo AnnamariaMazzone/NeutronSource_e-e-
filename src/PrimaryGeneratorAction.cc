@@ -61,7 +61,7 @@ PrimaryGeneratorAction::PrimaryGeneratorAction(DetectorConstruction* det)
     fParticleGun->SetParticlePosition(G4ThreeVector(0.,0.,0.));
     fParticleGun->SetParticleMomentumDirection(G4ThreeVector(0.,0.,1.));
     std::ifstream myfile
-    ("/Users/annamaria/lavoro/X17/NeutronSource_e+e-/e_0.347_V_17.0_0.00256_5m.txt");
+    ("/Users/annamaria/lavoro/X17/NeutronSource_e+e-/e_0.347_S+_17.0_0.86_5m.txt");
     //e_0.347_EM.txt");//e_0.347_V_17.0_0.00256.txt");//_5m.txt
     
     
